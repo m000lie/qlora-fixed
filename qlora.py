@@ -367,9 +367,10 @@ def get_accelerate_model(args, checkpoint_dir):
         tokenizer.add_special_tokens({
                 "eos_token": tokenizer.convert_ids_to_tokens(model.config.eos_token_id),
                 "bos_token": tokenizer.convert_ids_to_tokens(model.config.bos_token_id),
-                "unk_token": tokenizer.convert_ids_to_tokens(
-                    model.config.pad_token_id if model.config.pad_token_id != -1 else tokenizer.pad_token_id
-                ),
+                # not applicable to llama3 (it doesn't have unk token)
+                # "unk_token": tokenizer.convert_ids_to_tokens(
+                #     model.config.pad_token_id if model.config.pad_token_id != -1 else tokenizer.pad_token_id
+                # ),
         })
     
     if not args.full_finetune:
@@ -587,7 +588,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
             return load_dataset("timdettmers/openassistant-guanaco")
         elif dataset_name == 'vicuna':
             raise NotImplementedError("Vicuna data was not released.")
-        elif dataset_name == 'french-alpaca':
+        elif dataset_name == 'french':
             return load_dataset("jpacifico/French-Alpaca-dataset-Instruct-55K")
         else:
             if os.path.exists(dataset_name):
