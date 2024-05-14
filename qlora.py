@@ -392,6 +392,7 @@ def get_accelerate_model(args, checkpoint_dir):
                 bias="none",
                 task_type="CAUSAL_LM",
             )
+            print(config)
             model = get_peft_model(model, config)
 
     for name, module in model.named_modules():
