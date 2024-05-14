@@ -7,3 +7,6 @@ wandb==0.15.3
 accelerate
 bitsandbytes
 transformers
+torch
+torchvision
+torchaudio
