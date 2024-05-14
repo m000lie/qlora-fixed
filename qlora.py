@@ -383,6 +383,7 @@ def get_accelerate_model(args, checkpoint_dir):
         else:
             print(f'adding LoRA modules...')
             modules = find_all_linear_names(args, model)
+            modules=['q_proj','v_proj','k_proj']
             config = LoraConfig(
                 r=args.lora_r,
                 lora_alpha=args.lora_alpha,
